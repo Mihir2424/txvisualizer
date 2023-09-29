@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import { getQueryResult } from "../lib/getQueryResult";
 
-const FormSection = () => {
+const FormSection = ({ setWalletAddress, setData }) => {
   const {
     register,
     handleSubmit,
@@ -13,7 +14,9 @@ const FormSection = () => {
     console.log(data, "data");
     try {
       const res = await getQueryResult(data.walletAddress);
-      console.log(res, "response");
+      console.log(res?.records, "response");
+      setData(res?.records);
+      setWalletAddress(data.walletAddress);
     } catch (error) {
       console.log(error, "error");
     } finally {
